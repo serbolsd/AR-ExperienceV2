@@ -5,7 +5,9 @@ using UnityEngine;
 public class IDVEnemyManager : MonoBehaviour
 {
   public GameObject m_worldRoot;
+  public GameObject m_canvas;
   public GameObject[] m_enemyPrefab;
+  public GameObject m_arrowPrefab;
 
   //The game manager activates this when the game starts
   public bool m_startSpawning = false;
@@ -52,6 +54,10 @@ public class IDVEnemyManager : MonoBehaviour
         spawnPoint.y = m_spawnHeight;
         GameObject instancedEnemy = Instantiate(m_enemyPrefab[Random.RandomRange(0, m_enemyPrefab.Length)], spawnPoint, Quaternion.identity, m_worldRoot.transform);
         instancedEnemy.GetComponent<IDVEnemy>().m_worldRoot = m_worldRoot;
+        GameObject Arrow = Instantiate(m_arrowPrefab, m_canvas.transform);
+        Arrow.GetComponent<IDVFollowInCanvas>().objetToFollow = instancedEnemy;
+        Arrow.GetComponent<IDVFollowInCanvas>().canvas = m_canvas.GetComponent<RectTransform>();
+        instancedEnemy.GetComponent<IDVEnemy>().m_arrow = Arrow.GetComponent<IDVFollowInCanvas>();
         m_totalEnemiesCounter++;
       }
       else

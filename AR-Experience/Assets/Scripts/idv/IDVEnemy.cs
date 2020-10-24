@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class IDVEnemy : MonoBehaviour
 {
   public GameObject m_worldRoot;
+  public IDVFollowInCanvas m_arrow;
 
   [Header("Target")]
   public Transform m_target;
@@ -27,6 +28,7 @@ public class IDVEnemy : MonoBehaviour
   public float m_shootInterval = 1.5f;
   float m_shootIntervalCounter = 0.0f;
 
+  public bool m_visible = false;
   void Start()
   {
     m_currentLife = m_maxLife;
@@ -38,6 +40,7 @@ public class IDVEnemy : MonoBehaviour
 
   void Update()
   {
+    m_arrow.onUpdate();
     LookAtTarget();
     MoveToTarget();
 
@@ -109,9 +112,8 @@ public class IDVEnemy : MonoBehaviour
     if (m_currentLife <= 0)
     {
       AudioManager.playSound(Sounds.explosion, 0.9f);
+      Destroy(m_arrow.gameObject);
       Destroy(gameObject);
     }
   }
-
-
 }

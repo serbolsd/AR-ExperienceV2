@@ -103,6 +103,7 @@ public class LAManager : MonoBehaviour
     m_colors.SetActive(false);
     m_btnOkColor.SetActive(false);
     m_bColoring = false;
+    m_bColorsOpen = false;
     m_bMouseOnButton = false;
   }
 
