@@ -24,6 +24,8 @@ public class infoMenu : MonoBehaviour
 
   public void OnButtonPause()
   {
+    AudioManager.playSound(Sounds.click, 1.0f);
+
     if (!m_paused)
     {
       m_paused = true;
@@ -38,6 +40,8 @@ public class infoMenu : MonoBehaviour
   }
   public void OnButtonResume()
   {
+    AudioManager.playSound(Sounds.click, 1.0f);
+
     m_paused = false;
     Time.timeScale = 1.0f;
     m_infoScreen.SetActive(false);

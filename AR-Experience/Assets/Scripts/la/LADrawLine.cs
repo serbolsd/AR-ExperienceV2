@@ -102,11 +102,13 @@ public class LADrawLine : MonoBehaviour
 
   void onSelecetWidth(float width)
   {
+    AudioManager.playSound(Sounds.click, 1.0f);
     m_currWidth = width;
     FindObjectOfType<LAManager>().okBrush();
   }
   public void redoButton()
   {
+    AudioManager.playSound(Sounds.hit, 0.5f);
     if (m_linesBuffer.Count > 0)
     {
       LineRenderer tempLine = m_linesBuffer[m_linesBuffer.Count - 1];

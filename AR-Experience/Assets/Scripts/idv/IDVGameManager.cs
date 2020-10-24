@@ -56,6 +56,7 @@ public class IDVGameManager : MonoBehaviour
 
   public void OnButtonStart()
   {
+    AudioManager.playSound(Sounds.button, 1.0f);
     m_gameStartScreen.SetActive(false);
     m_enemyManager.m_startSpawning = true;
   }
@@ -67,11 +68,13 @@ public class IDVGameManager : MonoBehaviour
 
   public void OnButtonExit()
   {
+    Time.timeScale = 1.0f;
     SceneManager.LoadScene("MainMenu");
   }
 
   public void OnButtonPause()
   {
+    AudioManager.playSound(Sounds.click, 1.0f);
     if (!m_paused)
     {
       m_paused = true;
@@ -86,6 +89,7 @@ public class IDVGameManager : MonoBehaviour
   }
   public void OnButtonResume()
   {
+    AudioManager.playSound(Sounds.click, 1.0f);
     m_paused = false;
     Time.timeScale = 1.0f;
     m_pauseScreen.SetActive(false);
