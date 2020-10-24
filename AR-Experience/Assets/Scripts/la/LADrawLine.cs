@@ -14,7 +14,8 @@ public class LADrawLine : MonoBehaviour
   public LineRenderer m_lineRenderer;
   public List<Vector3> m_fingerPositions;
 
-  public List<LineRenderer> m_linesBuffer;
+  public List<List<LineRenderer>> m_linesBuffer;
+  int m_currentFrame = 0;
 
   [Header("Brush Size Buttons")]
   public Button m_button1;
@@ -27,6 +28,11 @@ public class LADrawLine : MonoBehaviour
 
   float m_currWidth = 1.0f;
 
+  [Header("Animation settings")]
+  public float m_frameDuration = 0.25f;
+  float m_frameTimeCounter = 0.0f;
+  bool m_isPlaying = false;
+
   // Start is called before the first frame update
   public void onStart()
   {
@@ -35,6 +41,9 @@ public class LADrawLine : MonoBehaviour
     m_button3.onClick.AddListener(delegate { onSelecetWidth(0.6f); });
     m_button4.onClick.AddListener(delegate { onSelecetWidth(0.8f); });
     m_button5.onClick.AddListener(delegate { onSelecetWidth(1.0f); });
+
+    m_linesBuffer = new List<List<LineRenderer>>();
+    m_linesBuffer.Add(new List<LineRenderer>());
   }
 
   // Update is called once per frame
@@ -64,6 +73,23 @@ public class LADrawLine : MonoBehaviour
     {
       FindObjectOfType<ColorPickerTester>().renderer = null;
     }
+
+
+    if (m_isPlaying)
+    {
+      m_frameTimeCounter += Time.deltaTime;
+      if (m_frameTimeCounter >= m_frameDuration)
+      {
+        m_frameTimeCounter = 0;
+        onNextFrameClick();
+      }
+
+      if (m_currentFrame == m_linesBuffer.Count-1)
+      {
+        m_isPlaying = false;
+        m_frameTimeCounter = 0;
+      }
+    }
   }
 
   void CreateLine()
@@ -77,12 +103,12 @@ public class LADrawLine : MonoBehaviour
       FindObjectOfType<ColorPickerTester>().onStart();
       m_lineRenderer = m_currentLine.GetComponent<LineRenderer>();
       m_lineRenderer.widthMultiplier = m_currWidth;
-      m_linesBuffer.Add(m_lineRenderer);
-      m_lineRenderer.sortingOrder = m_linesBuffer.Count;
+      m_linesBuffer[m_currentFrame].Add(m_lineRenderer);
+      m_lineRenderer.sortingOrder = m_linesBuffer[m_currentFrame].Count;
       //m_lineRenderer.material = m_currentMaterial;
       m_fingerPositions.Clear();
-      m_fingerPositions.Add(hit.point - (Vector3.forward * m_linesBuffer.Count * 0.005f));
-      m_fingerPositions.Add(hit.point - (Vector3.forward * m_linesBuffer.Count * 0.005f));
+      m_fingerPositions.Add(hit.point - (Vector3.forward * m_linesBuffer[m_currentFrame].Count * 0.005f));
+      m_fingerPositions.Add(hit.point - (Vector3.forward * m_linesBuffer[m_currentFrame].Count * 0.005f));
       m_lineRenderer.SetPosition(0, m_fingerPositions[0]);
       m_lineRenderer.SetPosition(1, m_fingerPositions[1]);
     }
@@ -90,9 +116,9 @@ public class LADrawLine : MonoBehaviour
 
   void UpdateLine(Vector3 newFingerPos)
   {
-    if (m_linesBuffer.Count > 0)
+    if (m_linesBuffer[m_currentFrame].Count > 0)
     {
-      newFingerPos -= Vector3.forward * m_linesBuffer.Count * 0.005f;
+      newFingerPos -= Vector3.forward * m_linesBuffer[m_currentFrame].Count * 0.005f;
       m_fingerPositions.Add(newFingerPos);
       m_lineRenderer.positionCount++;
       m_lineRenderer.SetPosition(m_lineRenderer.positionCount - 1, newFingerPos);
@@ -109,11 +135,85 @@ public class LADrawLine : MonoBehaviour
   public void redoButton()
   {
     AudioManager.playSound(Sounds.hit, 0.5f);
-    if (m_linesBuffer.Count > 0)
+    if (m_linesBuffer[m_currentFrame].Count > 0)
     {
-      LineRenderer tempLine = m_linesBuffer[m_linesBuffer.Count - 1];
-      m_linesBuffer.RemoveAt(m_linesBuffer.Count - 1);
+      LineRenderer tempLine = m_linesBuffer[m_currentFrame][m_linesBuffer[m_currentFrame].Count - 1];
+      m_linesBuffer[m_currentFrame].RemoveAt(m_linesBuffer[m_currentFrame].Count - 1);
       Destroy(tempLine);
     }
   }
+
+  public void onNewFrameClick()
+  {
+    HideLines(m_currentFrame);
+    m_linesBuffer.Add(new List<LineRenderer>());
+    m_currentFrame++;
+  }
+
+  public void onDeleteFrameClick()
+  {
+    if (m_currentFrame == 0)
+    {
+      return;
+    }
+
+    foreach (LineRenderer line in m_linesBuffer[m_currentFrame])
+    {
+      Destroy(line.gameObject);
+    }
+    m_linesBuffer.RemoveAt(m_currentFrame);
+    if (m_currentFrame > 0)
+    {
+      m_currentFrame--;
+      ShowLines(m_currentFrame);
+    }
+  }
+
+  public void onPreviousFrameClick()
+  {
+    if (m_currentFrame > 0)
+    {
+      HideLines(m_currentFrame);
+      m_currentFrame--;
+      ShowLines(m_currentFrame);
+    }
+  }
+
+  public void onNextFrameClick()
+  {
+    if (m_currentFrame < m_linesBuffer.Count-1)
+    {
+      HideLines(m_currentFrame);
+      m_currentFrame++;
+      ShowLines(m_currentFrame);
+    }
+  }
+
+  public void onPlayAnimClick()
+  {
+    m_isPlaying = true;
+
+    HideLines(m_currentFrame);
+    m_currentFrame = 0;
+    ShowLines(m_currentFrame);
+  }
+
+  void HideLines(int frame)
+  {
+    foreach (LineRenderer line in m_linesBuffer[frame])
+    {
+      line.enabled = false;
+    }
+  }
+
+  void ShowLines(int frame)
+  {
+    foreach (LineRenderer line in m_linesBuffer[frame])
+    {
+      line.enabled = true;
+    }
+  }
+
+  
+
 }
