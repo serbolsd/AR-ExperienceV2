@@ -167,6 +167,7 @@ public class LDVMoveObjectInGrid : MonoBehaviour
     {
       return;
     }
+    AudioManager.playSound(Sounds.place, 1.0f);
     Tile.GetComponent<LDVGridTile>().m_hasObject = false;
     GameObject deleteObj = Tile.GetComponent<LDVGridTile>().myObject;
     Tile.GetComponent<LDVGridTile>().myObject = null;

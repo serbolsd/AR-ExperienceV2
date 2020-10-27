@@ -25,11 +25,14 @@ public class pauseMenu : MonoBehaviour
   
   public void OnButtonExit()
   {
+    Time.timeScale = 1.0f;
     SceneManager.LoadScene("MainMenu");
   }
 
   public void OnButtonPause()
   {
+    AudioManager.playSound(Sounds.click, 1.0f);
+
     if (!m_paused)
     {
       m_paused = true;
@@ -44,6 +47,8 @@ public class pauseMenu : MonoBehaviour
   }
   public void OnButtonResume()
   {
+    AudioManager.playSound(Sounds.click, 1.0f);
+
     m_paused = false;
     Time.timeScale = 1.0f;
     m_pauseScreen.SetActive(false);

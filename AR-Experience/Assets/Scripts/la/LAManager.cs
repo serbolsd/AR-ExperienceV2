@@ -55,6 +55,7 @@ public class LAManager : MonoBehaviour
 
   public void selectColor()
   {
+    AudioManager.playSound(Sounds.click, 1.0f);
     if (m_bColorsOpen)
     {
       m_bColorsOpen = false;
@@ -85,6 +86,7 @@ public class LAManager : MonoBehaviour
 
   public void selectBrush()
   {
+    AudioManager.playSound(Sounds.click, 1.0f);
     if (m_bBrushesOpen)
     {
       m_bBrushesOpen = false;
@@ -99,6 +101,7 @@ public class LAManager : MonoBehaviour
 
   public void okColor()
   {
+    AudioManager.playSound(Sounds.click, 1.0f);
     //m_bDraw = true;
     m_colors.SetActive(false);
     m_btnOkColor.SetActive(false);
