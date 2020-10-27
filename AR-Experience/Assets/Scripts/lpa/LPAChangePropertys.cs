@@ -33,13 +33,13 @@ public class LPAChangePropertys : MonoBehaviour
   float m_minDistorcion = 0.0f;
   float m_maxDistorcion = 0.0f;
 
-  int cube;
+  public int m_cubeTarget;
   // Start is called before the first frame update
   void Start()
   {
     m_UI = FindObjectOfType<lpaUI>();
 
-    cube = Random.Range(0,2);
+    m_cubeTarget = Random.Range(0,2);
     m_camLensDistorcion=m_camPostProcess.GetSettings<LensDistortion>();
     m_camDepthOfField = m_camPostProcess.GetSettings<DepthOfField>();
     m_camColorGrading = m_camPostProcess.GetSettings<ColorGrading>();
@@ -125,7 +125,7 @@ public class LPAChangePropertys : MonoBehaviour
 
   bool checkFocusDistance()
   {
-    switch (cube)
+    switch (m_cubeTarget)
     {
       case 0:
         if (m_focusDistance.value <= m_maxRange1 && 
@@ -174,5 +174,10 @@ public class LPAChangePropertys : MonoBehaviour
       return true;
     }
     return false;
+  }
+
+  public int getTarget()
+  {
+    return m_cubeTarget;
   }
 }
