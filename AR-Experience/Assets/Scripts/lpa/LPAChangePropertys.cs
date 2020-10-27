@@ -39,7 +39,7 @@ public class LPAChangePropertys : MonoBehaviour
   {
     m_UI = FindObjectOfType<lpaUI>();
 
-    m_cubeTarget = Random.Range(0,2);
+    m_cubeTarget = Random.Range(0,3);
     m_camLensDistorcion=m_camPostProcess.GetSettings<LensDistortion>();
     m_camDepthOfField = m_camPostProcess.GetSettings<DepthOfField>();
     m_camColorGrading = m_camPostProcess.GetSettings<ColorGrading>();
