@@ -13,6 +13,7 @@ public enum Sounds
   correct,
   button,
   click,
+  remove,
 };
 
 public class AudioManager : MonoBehaviour
@@ -30,6 +31,7 @@ public class AudioManager : MonoBehaviour
   public AudioClip correct;
   public AudioClip button;
   public AudioClip click;
+  public AudioClip remove;
 
   void Awake()
   {
@@ -43,6 +45,7 @@ public class AudioManager : MonoBehaviour
     linkToEnum(Sounds.correct, correct);
     linkToEnum(Sounds.button, button);
     linkToEnum(Sounds.click, click);
+    linkToEnum(Sounds.remove, remove);
   }
 
   // Start is called before the first frame update

@@ -15,12 +15,15 @@ public class IDVGameManager : MonoBehaviour
   public Button m_pauseButton;
   public Button m_resumeButton;
   public Button m_pauseExitButton;
+  public Button m_shootButton;
 
   public GameObject m_gameStartScreen;
   public GameObject m_gameOverScreen;
   public GameObject m_pauseScreen;
 
   public Text m_winOrLoseText;
+
+  bool m_gameStarted = false;
 
   bool m_paused = false;
 
@@ -45,17 +48,20 @@ public class IDVGameManager : MonoBehaviour
     if (m_player.m_life <= 0)
     {
       m_gameOverScreen.SetActive(true);
+      m_shootButton.gameObject.SetActive(false);
       m_winOrLoseText.text = "Game Over";
     }
     else if (m_enemyManager.m_roundEnded)
     {
       m_gameOverScreen.SetActive(true);
+      m_shootButton.gameObject.SetActive(false);
       m_winOrLoseText.text = "¡Ganaste!";
     }
   }
 
   public void OnButtonStart()
   {
+    m_gameStarted = true;
     AudioManager.playSound(Sounds.button, 1.0f);
     m_gameStartScreen.SetActive(false);
     m_enemyManager.m_startSpawning = true;
@@ -74,6 +80,10 @@ public class IDVGameManager : MonoBehaviour
 
   public void OnButtonPause()
   {
+    if (!m_gameStarted)
+    {
+      m_gameStartScreen.SetActive(false);
+    }
     AudioManager.playSound(Sounds.click, 1.0f);
     if (!m_paused)
     {
@@ -89,6 +99,11 @@ public class IDVGameManager : MonoBehaviour
   }
   public void OnButtonResume()
   {
+    if (!m_gameStarted)
+    {
+      m_gameStartScreen.SetActive(true);
+    }
+
     AudioManager.playSound(Sounds.click, 1.0f);
     m_paused = false;
     Time.timeScale = 1.0f;

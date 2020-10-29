@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class IDVEnemyManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class IDVEnemyManager : MonoBehaviour
   public GameObject m_canvas;
   public GameObject[] m_enemyPrefab;
   public GameObject m_arrowPrefab;
+  public Text m_enemyCountText;
 
   //The game manager activates this when the game starts
   public bool m_startSpawning = false;
@@ -16,6 +18,7 @@ public class IDVEnemyManager : MonoBehaviour
   //total enemies to spawn this round
   public int m_totalEnemies = 10;
   int m_totalEnemiesCounter = 0;
+  public int m_enemiesKilled = 0;
 
   //distance to spawn the enemies from the player
   public float m_spawnDistance;
@@ -33,7 +36,7 @@ public class IDVEnemyManager : MonoBehaviour
 
   void Start()
   {
-
+    m_enemyCountText.text = m_enemiesKilled + "/" + m_totalEnemies;
   }
 
   void Update()
@@ -42,6 +45,8 @@ public class IDVEnemyManager : MonoBehaviour
     {
       return;
     }
+
+    m_enemyCountText.text = m_enemiesKilled + "/" + m_totalEnemies;
 
     if (m_totalEnemiesCounter < m_totalEnemies)
     {
@@ -54,6 +59,7 @@ public class IDVEnemyManager : MonoBehaviour
         spawnPoint.y = m_spawnHeight;
         GameObject instancedEnemy = Instantiate(m_enemyPrefab[Random.RandomRange(0, m_enemyPrefab.Length)], spawnPoint, Quaternion.identity, m_worldRoot.transform);
         instancedEnemy.GetComponent<IDVEnemy>().m_worldRoot = m_worldRoot;
+        instancedEnemy.GetComponent<IDVEnemy>().m_manager = this;
         GameObject Arrow = Instantiate(m_arrowPrefab, m_canvas.transform);
         Arrow.GetComponent<IDVFollowInCanvas>().objetToFollow = instancedEnemy;
         Arrow.GetComponent<IDVFollowInCanvas>().canvas = m_canvas.GetComponent<RectTransform>();

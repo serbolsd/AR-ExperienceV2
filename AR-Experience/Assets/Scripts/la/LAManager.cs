@@ -28,7 +28,6 @@ public class LAManager : MonoBehaviour
   void Start()
   {
     m_drawLine = FindObjectOfType<LADrawLine>();
-    m_color = FindObjectOfType<ColorPicker>();
     if (null != m_drawLine)
     {
       m_drawLine.onStart();
@@ -101,6 +100,8 @@ public class LAManager : MonoBehaviour
 
   public void okColor()
   {
+    m_drawLine.UpdateUIBrushColor(m_color.CurrentColor);
+
     AudioManager.playSound(Sounds.click, 1.0f);
     //m_bDraw = true;
     m_colors.SetActive(false);
@@ -108,10 +109,12 @@ public class LAManager : MonoBehaviour
     m_bColoring = false;
     m_bColorsOpen = false;
     m_bMouseOnButton = false;
+
   }
 
   public void okBrush()
   {
+
     //m_bDraw = true;
     //m_brushs.SetActive(false);
     //m_bMouseOnButton = false;
