@@ -27,13 +27,13 @@ public class mainMenu : MonoBehaviour
         SceneManager.LoadScene("LaGame");// scene alredy exist
         break;
       case 2:
-        SceneManager.LoadScene("LDAGAME");// scene not exist yet and the name could change
+        SceneManager.LoadScene("LpaGame");// scene not exist yet and the name could change
         break;
       case 3:
         SceneManager.LoadScene("LDVGAME");// scene alredy exist
         break;
       case 4:
-        SceneManager.LoadScene("LPAGAME"); // scene never go to exist 
+        SceneManager.LoadScene("LpaGame"); // scene never go to exist 
         break;
       default:
         break;

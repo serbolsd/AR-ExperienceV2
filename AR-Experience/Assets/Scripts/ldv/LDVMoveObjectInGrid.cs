@@ -122,14 +122,28 @@ public class LDVMoveObjectInGrid : MonoBehaviour
 
   void addObjectToGrid(ref GameObject Tile)
   {
-    if (null==Tile||Tile.GetComponent<LDVGridTile>().m_hasObject)
+
+    
+    GameObject newObj = null;
+    if (null == Tile )
     {
       return;
     }
-    AudioManager.playSound(Sounds.place, 1.0f);
-    GameObject newObj =null;
+
     int x = Tile.GetComponent<LDVGridTile>().m_indexX;
     int y = Tile.GetComponent<LDVGridTile>().m_indexY;
+    if (Tile.GetComponent<LDVGridTile>().m_hasObject)
+    {
+      if (Tile.GetComponent<LDVGridTile>().myObject.GetComponent<LDVBuildType>().m_id == typeObjectToAdd ||
+          !Tile.GetComponent<LDVGridTile>().m_movibleObject)
+      {
+        return;
+      }
+      GameObject deleteObj = Tile.GetComponent<LDVGridTile>().myObject;
+      Tile.GetComponent<LDVGridTile>().myObject = null;
+      Destroy(deleteObj);
+    }
+    AudioManager.playSound(Sounds.place, 1.0f);
     switch (typeObjectToAdd)
     {
       case 0: //cube
@@ -167,7 +181,7 @@ public class LDVMoveObjectInGrid : MonoBehaviour
     {
       return;
     }
-    AudioManager.playSound(Sounds.place, 1.0f);
+    AudioManager.playSound(Sounds.remove, 1.0f);
     Tile.GetComponent<LDVGridTile>().m_hasObject = false;
     GameObject deleteObj = Tile.GetComponent<LDVGridTile>().myObject;
     Tile.GetComponent<LDVGridTile>().myObject = null;

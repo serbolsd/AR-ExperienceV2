@@ -18,15 +18,12 @@ public class LADrawLine : MonoBehaviour
   int m_currentFrame = 0;
 
   [Header("Brush Size Buttons")]
-  public Button m_button1;
-  public Button m_button2;
-  public Button m_button3;
-  public Button m_button4;
-  public Button m_button5;
+  public Button[] m_Brushbuttons;
 
   public Transform m_world;
 
   float m_currWidth = 1.0f;
+  int m_selectedBrush = 4;
 
   [Header("Animation settings")]
   public float m_frameDuration = 0.25f;
@@ -36,14 +33,16 @@ public class LADrawLine : MonoBehaviour
   // Start is called before the first frame update
   public void onStart()
   {
-    m_button1.onClick.AddListener(delegate { onSelecetWidth(0.2f); });
-    m_button2.onClick.AddListener(delegate { onSelecetWidth(0.4f); });
-    m_button3.onClick.AddListener(delegate { onSelecetWidth(0.6f); });
-    m_button4.onClick.AddListener(delegate { onSelecetWidth(0.8f); });
-    m_button5.onClick.AddListener(delegate { onSelecetWidth(1.0f); });
+    m_Brushbuttons[0].onClick.AddListener(delegate { onSelecetWidth(0.2f, 0); });
+    m_Brushbuttons[1].onClick.AddListener(delegate { onSelecetWidth(0.4f, 1); });
+    m_Brushbuttons[2].onClick.AddListener(delegate { onSelecetWidth(0.6f, 2); });
+    m_Brushbuttons[3].onClick.AddListener(delegate { onSelecetWidth(0.8f, 3); });
+    m_Brushbuttons[4].onClick.AddListener(delegate { onSelecetWidth(1.0f, 4); });
 
     m_linesBuffer = new List<List<LineRenderer>>();
     m_linesBuffer.Add(new List<LineRenderer>());
+
+    UpdateUIBrushColor(Color.white);
   }
 
   // Update is called once per frame
@@ -61,9 +60,12 @@ public class LADrawLine : MonoBehaviour
       Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
       if (Physics.Raycast(ray, out hit, 1000.0f))
       {
-        if (Vector3.Distance(hit.point, m_fingerPositions[m_fingerPositions.Count - 1]) > 0.01f)
+        if (m_fingerPositions.Count > 0)
         {
-          UpdateLine(hit.point);
+          if (Vector3.Distance(hit.point, m_fingerPositions[m_fingerPositions.Count - 1]) > 0.01f)
+          {
+            UpdateLine(hit.point);
+          }
         }
       }
         
@@ -126,10 +128,13 @@ public class LADrawLine : MonoBehaviour
     
   }
 
-  void onSelecetWidth(float width)
+  void onSelecetWidth(float width, int selectedBrushIndex)
   {
     AudioManager.playSound(Sounds.click, 1.0f);
     m_currWidth = width;
+    int previousSelected = m_selectedBrush;
+    m_selectedBrush = selectedBrushIndex;
+    UpdateUIBrushColor(m_Brushbuttons[previousSelected].GetComponent<Image>().color);
     FindObjectOfType<LAManager>().okBrush();
   }
   public void redoButton()
@@ -214,6 +219,15 @@ public class LADrawLine : MonoBehaviour
     }
   }
 
-  
+  public void UpdateUIBrushColor(Color _color)
+  {
+    foreach (Button button in m_Brushbuttons)
+    {
+      Color tempColor = _color;
+      tempColor.a = 0.3f;
+      button.GetComponent<Image>().color = tempColor;
+    }
+    m_Brushbuttons[m_selectedBrush].GetComponent<Image>().color = _color;
+  }
 
 }

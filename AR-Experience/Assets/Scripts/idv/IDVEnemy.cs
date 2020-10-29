@@ -7,6 +7,7 @@ public class IDVEnemy : MonoBehaviour
 {
   public GameObject m_worldRoot;
   public IDVFollowInCanvas m_arrow;
+  public IDVEnemyManager m_manager;
 
   [Header("Target")]
   public Transform m_target;
@@ -118,6 +119,7 @@ public class IDVEnemy : MonoBehaviour
     m_lifeBar.value = (float)m_currentLife/ (float)m_maxLife;
     if (m_currentLife <= 0)
     {
+      m_manager.m_enemiesKilled++;
       AudioManager.playSound(Sounds.explosion, 0.9f);
       Destroy(m_arrow.gameObject);
       Destroy(gameObject);
