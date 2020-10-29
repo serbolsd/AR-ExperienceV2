@@ -12,6 +12,7 @@ public class infoMenu : MonoBehaviour
   public GameObject m_infoScreen;
 
   bool m_paused = false;
+  public bool m_showing = false;
 
   // Start is called before the first frame update
   void Start()
@@ -31,6 +32,7 @@ public class infoMenu : MonoBehaviour
       m_paused = true;
       Time.timeScale = 0.0f;
       m_infoScreen.SetActive(true);
+      m_showing = true;
     }
     else
     {
@@ -45,5 +47,6 @@ public class infoMenu : MonoBehaviour
     m_paused = false;
     Time.timeScale = 1.0f;
     m_infoScreen.SetActive(false);
+    m_showing = false;
   }
 }

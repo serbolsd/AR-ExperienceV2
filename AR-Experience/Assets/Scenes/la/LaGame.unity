@@ -699,7 +699,7 @@ RectTransform:
   m_Children:
   - {fileID: 1816420369}
   m_Father: {fileID: 1048426018}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1320,7 +1320,7 @@ RectTransform:
   m_Children:
   - {fileID: 1926983717}
   m_Father: {fileID: 1048426018}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -2051,7 +2051,7 @@ RectTransform:
   m_Children:
   - {fileID: 1545035048}
   m_Father: {fileID: 1048426018}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -2455,7 +2455,7 @@ RectTransform:
   m_Children:
   - {fileID: 404287605}
   m_Father: {fileID: 1048426018}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -2790,7 +2790,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 994820577}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1048426021}
+        m_TargetAssemblyTypeName: CheckOpenMenu, Assembly-CSharp
+        m_MethodName: infoMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &994820577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2841,7 +2853,7 @@ RectTransform:
   m_LocalScale: {x: 5.8781, y: 5.8781, z: 5.8781}
   m_Children: []
   m_Father: {fileID: 1048426018}
-  m_RootOrder: 2
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -2927,7 +2939,7 @@ RectTransform:
   - {fileID: 212523976}
   - {fileID: 811868727}
   m_Father: {fileID: 1048426018}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2993,6 +3005,7 @@ GameObject:
   - component: {fileID: 1048426015}
   - component: {fileID: 1048426020}
   - component: {fileID: 1048426019}
+  - component: {fileID: 1048426021}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3073,7 +3086,6 @@ RectTransform:
   m_Children:
   - {fileID: 1908543256}
   - {fileID: 824527418}
-  - {fileID: 994820579}
   - {fileID: 2028120402}
   - {fileID: 2034133992}
   - {fileID: 810599838}
@@ -3086,6 +3098,7 @@ RectTransform:
   - {fileID: 1148810973}
   - {fileID: 1305704611}
   - {fileID: 1611242340}
+  - {fileID: 994820579}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3110,6 +3123,7 @@ MonoBehaviour:
   m_closeButton: {fileID: 85579598}
   m_xButton: {fileID: 1127898983}
   m_infoScreen: {fileID: 2028120399}
+  m_showing: 0
 --- !u!114 &1048426020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3125,6 +3139,23 @@ MonoBehaviour:
   m_pauseButton: {fileID: 1908543253}
   m_resumeButton: {fileID: 1080280433}
   m_pauseExitButton: {fileID: 1097294151}
+  m_pauseScreen: {fileID: 824527415}
+  m_showing: 0
+--- !u!114 &1048426021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048426014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24df8dec3f5052342b454ecc1367e40f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_pause: {fileID: 1048426020}
+  m_info: {fileID: 1048426019}
+  m_infoScreen: {fileID: 2028120399}
   m_pauseScreen: {fileID: 824527415}
 --- !u!1 &1080280429
 GameObject:
@@ -3641,7 +3672,7 @@ RectTransform:
   m_Children:
   - {fileID: 1561902172}
   m_Father: {fileID: 1048426018}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3896,7 +3927,7 @@ RectTransform:
   m_Children:
   - {fileID: 122393269}
   m_Father: {fileID: 1048426018}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4440,7 +4471,7 @@ RectTransform:
   m_LocalScale: {x: 5.7049, y: 5.7049, z: 5.7049}
   m_Children: []
   m_Father: {fileID: 1048426018}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4651,7 +4682,7 @@ RectTransform:
   m_Children:
   - {fileID: 812271812}
   m_Father: {fileID: 1048426018}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5077,7 +5108,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1908543254}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1048426021}
+        m_TargetAssemblyTypeName: CheckOpenMenu, Assembly-CSharp
+        m_MethodName: pauseButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1908543254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5337,7 +5380,7 @@ RectTransform:
   - {fileID: 85579595}
   - {fileID: 1836420896}
   m_Father: {fileID: 1048426018}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5423,7 +5466,7 @@ RectTransform:
   m_Children:
   - {fileID: 304405359}
   m_Father: {fileID: 1048426018}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5830,7 +5873,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22448498, guid: 916ee089a0d7b63419075f91e1c657ec, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 22448498, guid: 916ee089a0d7b63419075f91e1c657ec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

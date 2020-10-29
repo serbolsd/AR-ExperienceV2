@@ -34,6 +34,10 @@ public class IDVBullet : MonoBehaviour
   {
     float radius = m_radius * 2;
     transform.localScale = new Vector3(radius, radius, radius);
+  }
+
+  public void onStart()
+  {
     Destroy(this.gameObject, m_lifeTime);
   }
 
@@ -69,12 +73,16 @@ public class IDVBullet : MonoBehaviour
   {
     IDVPlayer player = other.GetComponent<IDVPlayer>();
 
-    if (m_playerShot && !player) //if is a player shoot destroy de any other object
+    if (m_playerShot && null==player) //if is a player shoot destroy de any other object
     {
       IDVEnemy enemy = other.GetComponent<IDVEnemy>();
       if (enemy != null)
       {
         enemy.HurtEnemy(1);
+      }
+      else
+      {
+        Destroy(other.gameObject);
       }
 
       Destroy(this.gameObject);

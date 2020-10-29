@@ -40,7 +40,10 @@ public class IDVEnemy : MonoBehaviour
 
   void Update()
   {
-    m_arrow.onUpdate();
+    if (null != m_arrow)
+    {
+      m_arrow.onUpdate();
+    }
     LookAtTarget();
     MoveToTarget();
 
@@ -97,6 +100,10 @@ public class IDVEnemy : MonoBehaviour
     //Transform newTransform = transform;
     IDVBullet newbullet = Instantiate(m_bulletPrefab, transform.position, Quaternion.identity, m_worldRoot.transform).GetComponent<IDVBullet>();
     //newbullet.transform = newTransform;
+    newbullet.m_radius = 0.1f;
+    newbullet.m_speed = 1.5f;
+    newbullet.m_lifeTime = 7.0f;
+    newbullet.onStart();
     newbullet.m_direction = (Camera.main.transform.position - transform.position).normalized;
     newbullet.m_playerShot = false;
     newbullet.setColorEnemy();

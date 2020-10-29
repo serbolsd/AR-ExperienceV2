@@ -10,10 +10,18 @@ public class IDVFollowInCanvas : MonoBehaviour
   public Transform camTransform;
   public Vector3 canvasPos = new Vector3(0, 0, 0);
   public Vector3 dir;
+  public Vector3 forward;
+  public Vector3 realdir;
+  public Vector3 poscam;
+  public Vector3 posEnemi;
   public float width;
   public float height;
   public float angle;
 
+  //private void Update()
+  //{
+  //  onUpdate();
+  //}
   // Update is called once per frame
   public void onUpdate()
   {
@@ -31,6 +39,8 @@ public class IDVFollowInCanvas : MonoBehaviour
     {
       Destroy(gameObject);
     }
+    poscam = Camera.main.transform.position;
+    posEnemi = objetToFollow.transform.position;
     Vector3 goscreen = Camera.main.WorldToScreenPoint(objetToFollow.transform.position);
     Debug.Log("GoPos " + goscreen);
 
@@ -40,7 +50,7 @@ public class IDVFollowInCanvas : MonoBehaviour
     float distY = Vector3.Distance(new Vector3(0f, Screen.height/2, 0f), new Vector3(0f, goscreen.y, 0f));
     Debug.Log("distY " + distY);
 
-    if (distX > Screen.width || distY > Screen.height/2)
+    if (distX > Screen.width/2 || distY > Screen.height/2)
     {
       GetComponent<Image>().enabled = true;
     }
@@ -48,27 +58,35 @@ public class IDVFollowInCanvas : MonoBehaviour
     {
       GetComponent<Image>().enabled = false;
     }
-    dir = objetToFollow.transform.position- Camera.main.transform.position;
-    dir.z = 0;
+    forward = Camera.main.transform.forward;
+    dir = objetToFollow.transform.position - (Camera.main.transform.position);
     dir.Normalize();
+    realdir = dir - forward;
+    realdir.z = 0;
+    realdir.Normalize();
+    Vector3 toAngle = realdir;
+    if(Vector3.Dot(dir, forward)<0)
+    {
+      GetComponent<Image>().enabled = true;
+    }
     width = canvas.rect.width;
     height = canvas.rect.height;
-    angle = Vector3.Angle(Vector3.right, dir);
-    if (dir.x>0)
+    angle = Vector3.Angle(Vector3.right, toAngle);
+    if (toAngle.x>0)
     {
-      canvasPos.x = ((canvas.rect.width / 2) - GetComponent<Image>().sprite.rect.width) * dir.x;
+      canvasPos.x = ((canvas.rect.width / 2) - GetComponent<Image>().sprite.rect.width) * toAngle.x;
     }
     else
     {
-      canvasPos.x = (-canvas.rect.width / 2  + GetComponent<Image>().sprite.rect.width) * -dir.x;
+      canvasPos.x = (-canvas.rect.width / 2  + GetComponent<Image>().sprite.rect.width) * -toAngle.x;
     }
-    if (dir.y > 0)
+    if (toAngle.y > 0)
     {
-      canvasPos.y = canvas.rect.height / 4*dir.y;
+      canvasPos.y = canvas.rect.height / 4* toAngle.y;
     }
     else
     {
-      canvasPos.y = -canvas.rect.height / 4 * -dir.y;
+      canvasPos.y = -canvas.rect.height / 4 * -toAngle.y;
       angle *= -1;
     }
     GetComponent<RectTransform>().localPosition = canvasPos;

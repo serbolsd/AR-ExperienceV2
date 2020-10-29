@@ -37,6 +37,8 @@ public class IDVPlayer : MonoBehaviour
     AudioManager.playSound(Sounds.shoot, 0.5f);
     IDVBullet newbullet= Instantiate(bullet,transform.position, Quaternion.identity, m_worldRoot.transform).GetComponent<IDVBullet>();
     newbullet.m_direction = transform.forward;
+    newbullet.m_speed = 10;
+    newbullet.onStart();
     newbullet.m_playerShot = true;
     newbullet.setColorPlayer();
   }
