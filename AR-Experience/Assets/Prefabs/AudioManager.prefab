@@ -54,6 +54,8 @@ MonoBehaviour:
   button: {fileID: 8300000, guid: f79e3fc0175df0f4e97d31f641b0d97f, type: 3}
   click: {fileID: 8300000, guid: 7fd672a454dabc847b0fa82d87d466af, type: 3}
   remove: {fileID: 8300000, guid: 6120e2c39f9d3d748a68e395ee5badbd, type: 3}
+  photo: {fileID: 8300000, guid: 300b877b0276e884b895d156f3fddab6, type: 3}
+  wrong: {fileID: 8300000, guid: e4b375eb67489164e932412f0c19df98, type: 3}
 --- !u!82 &1151075570733489797
 AudioSource:
   m_ObjectHideFlags: 0
