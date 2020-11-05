@@ -34,7 +34,7 @@ public class LPAChangePropertys : MonoBehaviour
   bool m_saturationCorrect = false;
   bool m_contrastCorrect = false;
 
-  bool m_gameOver = false;
+  public bool m_gameOver = false;
 
   public GameObject gameOverWindow;
   // Start is called before the first frame update

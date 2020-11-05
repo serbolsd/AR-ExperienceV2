@@ -6,6 +6,42 @@ using UnityEngine.SceneManagement;
 
 public class LPAManager : MonoBehaviour
 {
+  public float m_timer = 120;
+  public GameObject m_gameOverLose;
+  public GameObject m_timerTxt;
+  public bool m_timerActive = true;
+  public LPAChangePropertys m_changePropertys;
+
+  void Start()
+  {
+    if (m_timerActive)
+    {
+      m_timerTxt.SetActive(true);
+      
+    }
+    else
+    {
+      m_timerTxt.SetActive(false);
+    }
+  }
+
+  void Update()
+  {
+    if (m_changePropertys.m_gameOver)
+    {
+      return;
+    }
+    m_timer -= Time.deltaTime;
+    int entero = (int)m_timer;
+    m_timerTxt.GetComponent<Text>().text = entero.ToString();
+    if (m_timer <= 0 && m_timerActive)
+    {
+      AudioManager.playSound(Sounds.wrong);
+      m_timer = 0;
+      m_gameOverLose.SetActive(true);
+      m_changePropertys.m_gameOver = true;
+    }
+  }
   public void again()
   {
     SceneManager.LoadScene("LpaGame");
