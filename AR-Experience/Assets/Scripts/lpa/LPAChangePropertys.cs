@@ -34,6 +34,9 @@ public class LPAChangePropertys : MonoBehaviour
   bool m_saturationCorrect = false;
   bool m_contrastCorrect = false;
 
+  bool m_gameOver = false;
+
+  public GameObject gameOverWindow;
   // Start is called before the first frame update
   void Start()
   {
@@ -62,6 +65,10 @@ public class LPAChangePropertys : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
+    if (m_gameOver)
+    {
+      return;
+    }
     m_focusDistance.value = m_UI.GetSliderValue(lpaUI.SLIDERS.kFocalLenght);
     m_saturation.value = m_UI.GetSliderValue(lpaUI.SLIDERS.kSaturation);
     m_contraste.value = m_UI.GetSliderValue(lpaUI.SLIDERS.kContrast);
@@ -176,6 +183,10 @@ public class LPAChangePropertys : MonoBehaviour
 
   public void takePhoto()
   {
+    if (m_gameOver)
+    {
+      return;
+    }
     Ray raycast = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
     RaycastHit hit;
     if (Physics.Raycast(raycast, out hit, 10000) && m_focusCorrect && m_saturationCorrect && m_contrastCorrect)
@@ -183,8 +194,15 @@ public class LPAChangePropertys : MonoBehaviour
       if (hit.transform.gameObject == m_targetManager.m_currTarget)
       {
         Debug.Log("correct target");
-        m_targetManager.ChangeTarget();
-        calculateRequeriments();
+        if (m_targetManager.ChangeTarget())
+        {
+          calculateRequeriments();
+        }
+        else
+        {
+          m_gameOver = true;
+          gameOverWindow.SetActive(true);
+        }
         AudioManager.playSound(Sounds.photo, 1.0f);
         AudioManager.playSound(Sounds.correct, 0.2f);
       }
