@@ -11,6 +11,8 @@ public class LPAManager : MonoBehaviour
   public GameObject m_timerTxt;
   public bool m_timerActive = true;
   public LPAChangePropertys m_changePropertys;
+  public Button m_pause;
+  public Button m_info;
 
   void Start()
   {
@@ -29,6 +31,8 @@ public class LPAManager : MonoBehaviour
   {
     if (m_changePropertys.m_gameOver)
     {
+      m_pause.interactable = false;
+      m_info.interactable = false;
       return;
     }
     m_timer -= Time.deltaTime;
