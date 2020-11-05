@@ -5,6 +5,7 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class LPAChangePropertys : MonoBehaviour
 {
+  public LPATargetManager m_targetManager;
   public PostProcessLayer m_camPostProcess;
   public LensDistortion m_camLensDistorcion;
   public DepthOfField m_camDepthOfField;
@@ -16,12 +17,8 @@ public class LPAChangePropertys : MonoBehaviour
 
   public lpaUI m_UI;
 
-  const float m_minRange1 = 4.5f;
-  const float m_maxRange1 = 5.0f;
-  const float m_minRange2 = 6.7f;
-  const float m_maxRange2 = 7.5f;
-  const float m_minRange3 = 8.2f;
-  const float m_maxRange3 = 9.5f;
+  float m_minRange = 4.5f;
+  float m_maxRange = 5.0f;
 
   float m_ObjetiveSaturation = 0.0f;
   float m_minSaturation = 0.0f;
@@ -33,14 +30,16 @@ public class LPAChangePropertys : MonoBehaviour
   float m_minDistorcion = 0.0f;
   float m_maxDistorcion = 0.0f;
 
-  public int m_cubeTarget;
+  bool m_focusCorrect = false;
+  bool m_saturationCorrect = false;
+  bool m_contrastCorrect = false;
+
   // Start is called before the first frame update
   void Start()
   {
     m_UI = FindObjectOfType<lpaUI>();
 
-    m_cubeTarget = Random.Range(0,3);
-    m_camLensDistorcion=m_camPostProcess.GetSettings<LensDistortion>();
+    m_camLensDistorcion = m_camPostProcess.GetSettings<LensDistortion>();
     m_camDepthOfField = m_camPostProcess.GetSettings<DepthOfField>();
     m_camColorGrading = m_camPostProcess.GetSettings<ColorGrading>();
     m_focusDistance.value = Random.Range(0.1f, 10.0f);
@@ -53,33 +52,11 @@ public class LPAChangePropertys : MonoBehaviour
     m_UI.SetSliderColor(Color.red, lpaUI.SLIDERS.kSaturation);
     m_UI.SetSliderColor(Color.red, lpaUI.SLIDERS.kContrast);
 
-    m_UI.SetSliderValue(lpaUI.SLIDERS.kFocalLenght,m_focusDistance.value);
+    m_UI.SetSliderValue(lpaUI.SLIDERS.kFocalLenght, m_focusDistance.value);
     m_UI.SetSliderValue(lpaUI.SLIDERS.kSaturation, m_saturation.value);
-    m_UI.SetSliderValue(lpaUI.SLIDERS.kContrast,m_contraste.value);
+    m_UI.SetSliderValue(lpaUI.SLIDERS.kContrast, m_contraste.value);
 
-    m_ObjetiveSaturation = Random.Range(-100,100);
-    m_maxSaturation = m_ObjetiveSaturation + 10;
-    if (m_maxSaturation>100)
-      m_maxSaturation = 100;
-    m_minSaturation = m_ObjetiveSaturation - 10;
-    if (m_minSaturation < -100)
-      m_minSaturation = -100;
-
-    m_ObjetiveContrast = Random.Range(-50,100);
-    m_maxContrast = m_ObjetiveContrast + 10;
-    if (m_maxContrast > 100)
-      m_maxContrast = 100;
-    m_minContrast = m_ObjetiveContrast - 10;
-    if (m_minContrast < -50)
-      m_minContrast = -50;
-
-    m_ObjetiveDistorcion = Random.Range(-30,30);
-    m_maxDistorcion = m_ObjetiveDistorcion + 5;
-    if (m_maxDistorcion > 30)
-      m_maxDistorcion = 30;
-    m_minDistorcion = m_ObjetiveDistorcion - 5;
-    if (m_minDistorcion < -30)
-      m_minDistorcion = -30;
+    calculateRequeriments();
   }
 
   // Update is called once per frame
@@ -96,26 +73,32 @@ public class LPAChangePropertys : MonoBehaviour
     if (checkFocusDistance())
     {
       m_UI.SetSliderColor(Color.green, lpaUI.SLIDERS.kFocalLenght);
+      m_focusCorrect = true;
     }
     else
     {
       m_UI.SetSliderColor(Color.red, lpaUI.SLIDERS.kFocalLenght);
+      m_focusCorrect = false;
     }
     if (checkSaturation())
     {
       m_UI.SetSliderColor(Color.green, lpaUI.SLIDERS.kSaturation);
+      m_saturationCorrect = true;
     }
     else
     {
       m_UI.SetSliderColor(Color.red, lpaUI.SLIDERS.kSaturation);
+      m_saturationCorrect = false;
     }
     if (checkContrast())
     {
       m_UI.SetSliderColor(Color.green, lpaUI.SLIDERS.kContrast);
+      m_contrastCorrect = true;
     }
     else
     {
       m_UI.SetSliderColor(Color.red, lpaUI.SLIDERS.kContrast);
+      m_contrastCorrect = false;
     }
     //if (checkDistorcion())
     //{
@@ -123,33 +106,48 @@ public class LPAChangePropertys : MonoBehaviour
     //}
   }
 
+  void calculateFocalDistance()
+  {
+    float distance = Vector3.Distance(m_targetManager.m_currTarget.transform.position, Camera.main.transform.position);
+    m_maxRange = distance;
+    m_minRange = distance - 1.0f;
+    Debug.Log(distance);
+  }
+
+  void calculateRequeriments()
+  {
+    m_ObjetiveSaturation = Random.Range(-100, 100);
+    m_maxSaturation = m_ObjetiveSaturation + 10;
+    if (m_maxSaturation > 100)
+      m_maxSaturation = 100;
+    m_minSaturation = m_ObjetiveSaturation - 10;
+    if (m_minSaturation < -100)
+      m_minSaturation = -100;
+
+    m_ObjetiveContrast = Random.Range(-50, 100);
+    m_maxContrast = m_ObjetiveContrast + 10;
+    if (m_maxContrast > 100)
+      m_maxContrast = 100;
+    m_minContrast = m_ObjetiveContrast - 10;
+    if (m_minContrast < -50)
+      m_minContrast = -50;
+
+    m_ObjetiveDistorcion = Random.Range(-30, 30);
+    m_maxDistorcion = m_ObjetiveDistorcion + 5;
+    if (m_maxDistorcion > 30)
+      m_maxDistorcion = 30;
+    m_minDistorcion = m_ObjetiveDistorcion - 5;
+    if (m_minDistorcion < -30)
+      m_minDistorcion = -30;
+  }
+
   bool checkFocusDistance()
   {
-    switch (m_cubeTarget)
+    calculateFocalDistance();
+    if (m_focusDistance.value <= m_maxRange &&
+        m_focusDistance.value >= m_minRange)
     {
-      case 0:
-        if (m_focusDistance.value <= m_maxRange1 && 
-            m_focusDistance.value >= m_minRange1)
-        {
-          return true;
-        }
-        break;
-      case 1:
-        if(m_focusDistance.value <= m_maxRange2 && 
-           m_focusDistance.value >= m_minRange2)
-        {
-          return true;
-        }
-        break;
-      case 2:
-        if(m_focusDistance.value <= m_maxRange2 && 
-           m_focusDistance.value >= m_minRange2)
-        {
-          return true;
-        }
-        break;
-      default:
-        break;
+      return true;
     }
     return false;
   }
@@ -176,8 +174,30 @@ public class LPAChangePropertys : MonoBehaviour
     return false;
   }
 
-  public int getTarget()
+  public void takePhoto()
   {
-    return m_cubeTarget;
+    Ray raycast = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+    RaycastHit hit;
+    if (Physics.Raycast(raycast, out hit, 10000) && m_focusCorrect && m_saturationCorrect && m_contrastCorrect)
+    {
+      if (hit.transform.gameObject == m_targetManager.m_currTarget)
+      {
+        Debug.Log("correct target");
+        m_targetManager.ChangeTarget();
+        calculateRequeriments();
+        AudioManager.playSound(Sounds.photo, 1.0f);
+        AudioManager.playSound(Sounds.correct, 0.2f);
+      }
+      else
+      {
+        Debug.Log("wrong target");
+        AudioManager.playSound(Sounds.wrong, 0.9f);
+      }
+    }
+    else
+    {
+      Debug.Log("wrong target");
+      AudioManager.playSound(Sounds.wrong, 0.9f);
+    }
   }
 }
