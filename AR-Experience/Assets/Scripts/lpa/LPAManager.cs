@@ -8,6 +8,7 @@ public class LPAManager : MonoBehaviour
 {
   public float m_timer = 120;
   public GameObject m_gameOverLose;
+  public GameObject m_instrucScreen;
   public GameObject m_timerTxt;
   public bool m_timerActive = true;
   public LPAChangePropertys m_changePropertys;
@@ -25,6 +26,8 @@ public class LPAManager : MonoBehaviour
     {
       m_timerTxt.SetActive(false);
     }
+    m_instrucScreen.SetActive(true);
+    Time.timeScale = 0;
   }
 
   void Update()
@@ -54,5 +57,11 @@ public class LPAManager : MonoBehaviour
   public void exit()
   {
     SceneManager.LoadScene("MainMenu");
+  }
+
+  public void start()
+  {
+    m_instrucScreen.SetActive(false);
+    Time.timeScale = 1;
   }
 }
