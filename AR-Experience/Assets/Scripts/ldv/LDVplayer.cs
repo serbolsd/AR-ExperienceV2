@@ -22,6 +22,9 @@ public class LDVplayer : MonoBehaviour
   public RaycastHit lr;
   public LayerMask layer;
 
+  [Header("Animation settings")]
+  public Animator m_animator;
+
   // Start is called before the first frame update
   public void onStart()
   {
@@ -38,7 +41,14 @@ public class LDVplayer : MonoBehaviour
       m_active = true;
     }
 
-    
+    if (m_active)
+    {
+      m_animator.SetBool("walk", true);
+    }
+    else
+    {
+      m_animator.SetBool("walk", false);
+    }
 
 
     if (Physics.Raycast(transform.position + transform.forward * 0.02f, -transform.up, out lr,0.7f, layer))
@@ -84,8 +94,12 @@ public class LDVplayer : MonoBehaviour
 
   public void Jump()
   {
+    Vector3 currVel = m_rb.velocity;
+    currVel.y = 0.0f;
+    m_rb.velocity = currVel;
     AudioManager.playSound(Sounds.jump, 1.0f);
     m_rb.AddForce(Vector3.up * m_jumpPower, ForceMode.Impulse);
+    m_animator.SetTrigger("jump");
   }
 
   public void active()
