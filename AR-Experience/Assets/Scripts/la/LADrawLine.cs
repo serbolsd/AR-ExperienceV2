@@ -15,6 +15,7 @@ public class LADrawLine : MonoBehaviour
   public List<Vector3> m_fingerPositions;
 
   public List<List<LineRenderer>> m_linesBuffer;
+  public List<List<Color>> m_linesColorsBuffer;
   int m_currentFrame = 0;
 
   [Header("Brush Size Buttons")]
@@ -42,14 +43,16 @@ public class LADrawLine : MonoBehaviour
     m_linesBuffer = new List<List<LineRenderer>>();
     m_linesBuffer.Add(new List<LineRenderer>());
 
+    m_linesColorsBuffer = new List<List<Color>>();
+    m_linesColorsBuffer.Add(new List<Color>());
+    
+
     UpdateUIBrushColor(Color.white);
   }
 
   // Update is called once per frame
   public void onUpdate()
   {
-
-    
     if (Input.GetMouseButtonDown(0))
     {
       CreateLine();
@@ -83,7 +86,17 @@ public class LADrawLine : MonoBehaviour
       if (m_frameTimeCounter >= m_frameDuration)
       {
         m_frameTimeCounter = 0;
-        onNextFrameClick();
+
+        if (m_currentFrame < m_linesBuffer.Count - 1)
+        {
+          m_currentFrame++;
+
+          HideLines(m_currentFrame - 1); //se oculta la anterior
+
+          ShowLines(m_currentFrame); //se muestra y colorea la actual
+          ColoredLines(m_currentFrame);
+
+        }
       }
 
       if (m_currentFrame == m_linesBuffer.Count-1)
@@ -106,11 +119,12 @@ public class LADrawLine : MonoBehaviour
       m_lineRenderer = m_currentLine.GetComponent<LineRenderer>();
       m_lineRenderer.widthMultiplier = m_currWidth;
       m_linesBuffer[m_currentFrame].Add(m_lineRenderer);
+      m_linesColorsBuffer[m_currentFrame].Add(m_lineRenderer.materials[0].color);
       m_lineRenderer.sortingOrder = m_linesBuffer[m_currentFrame].Count;
       //m_lineRenderer.material = m_currentMaterial;
       m_fingerPositions.Clear();
-      m_fingerPositions.Add(hit.point - (Vector3.forward * m_linesBuffer[m_currentFrame].Count * 0.005f));
-      m_fingerPositions.Add(hit.point - (Vector3.forward * m_linesBuffer[m_currentFrame].Count * 0.005f));
+      m_fingerPositions.Add(hit.point - (Vector3.forward * m_linesBuffer[m_currentFrame].Count * 0.005f * (m_currentFrame+1)));
+      m_fingerPositions.Add(hit.point - (Vector3.forward * m_linesBuffer[m_currentFrame].Count * 0.005f * (m_currentFrame + 1)));
       m_lineRenderer.SetPosition(0, m_fingerPositions[0]);
       m_lineRenderer.SetPosition(1, m_fingerPositions[1]);
     }
@@ -120,7 +134,7 @@ public class LADrawLine : MonoBehaviour
   {
     if (m_linesBuffer[m_currentFrame].Count > 0)
     {
-      newFingerPos -= Vector3.forward * m_linesBuffer[m_currentFrame].Count * 0.005f;
+      newFingerPos -= Vector3.forward * m_linesBuffer[m_currentFrame].Count * 0.005f * (m_currentFrame + 1);
       m_fingerPositions.Add(newFingerPos);
       m_lineRenderer.positionCount++;
       m_lineRenderer.SetPosition(m_lineRenderer.positionCount - 1, newFingerPos);
@@ -144,15 +158,24 @@ public class LADrawLine : MonoBehaviour
     {
       LineRenderer tempLine = m_linesBuffer[m_currentFrame][m_linesBuffer[m_currentFrame].Count - 1];
       m_linesBuffer[m_currentFrame].RemoveAt(m_linesBuffer[m_currentFrame].Count - 1);
+      m_linesColorsBuffer[m_currentFrame].RemoveAt(m_linesColorsBuffer[m_currentFrame].Count - 1);
       Destroy(tempLine);
     }
   }
 
   public void onNewFrameClick()
   {
-    HideLines(m_currentFrame);
-    m_linesBuffer.Add(new List<LineRenderer>());
     m_currentFrame++;
+
+    if (m_currentFrame-2 >= 0) //se oculta la anterior de l anterior
+    {
+      HideLines(m_currentFrame-2);
+    }
+
+    TransparentLines(m_currentFrame-1); //se transparenta la anterior
+
+    m_linesBuffer.Add(new List<LineRenderer>());
+    m_linesColorsBuffer.Add(new List<Color>());
   }
 
   public void onDeleteFrameClick()
@@ -167,10 +190,15 @@ public class LADrawLine : MonoBehaviour
       Destroy(line.gameObject);
     }
     m_linesBuffer.RemoveAt(m_currentFrame);
+    m_linesColorsBuffer.RemoveAt(m_currentFrame);
     if (m_currentFrame > 0)
     {
       m_currentFrame--;
       ShowLines(m_currentFrame);
+      ColoredLines(m_currentFrame);
+
+      ShowLines(m_currentFrame-1);
+      TransparentLines(m_currentFrame - 1);
     }
   }
 
@@ -178,9 +206,18 @@ public class LADrawLine : MonoBehaviour
   {
     if (m_currentFrame > 0)
     {
-      HideLines(m_currentFrame);
       m_currentFrame--;
-      ShowLines(m_currentFrame);
+
+      HideLines(m_currentFrame+1); //se oculta la siguiente
+
+      ShowLines(m_currentFrame); //se muestra y colorea la actual
+      ColoredLines(m_currentFrame);
+
+      if (m_currentFrame - 1 >= 0) //se transparenta la anterior
+      {
+        ShowLines(m_currentFrame-1);
+        TransparentLines(m_currentFrame-1);
+      }
     }
   }
 
@@ -188,9 +225,18 @@ public class LADrawLine : MonoBehaviour
   {
     if (m_currentFrame < m_linesBuffer.Count-1)
     {
-      HideLines(m_currentFrame);
       m_currentFrame++;
-      ShowLines(m_currentFrame);
+
+      if (m_currentFrame - 2 >= 0) //se oculta la anterior de l anterior
+      {
+        HideLines(m_currentFrame - 2);
+      }
+
+      TransparentLines(m_currentFrame-1); //se transparenta la anterior
+
+      ShowLines(m_currentFrame); //se muestra y colorea la actual
+      ColoredLines(m_currentFrame);
+
     }
   }
 
@@ -198,9 +244,12 @@ public class LADrawLine : MonoBehaviour
   {
     m_isPlaying = true;
 
+    HideLines(m_currentFrame - 1); //se oculta la anterior
     HideLines(m_currentFrame);
     m_currentFrame = 0;
     ShowLines(m_currentFrame);
+    ColoredLines(m_currentFrame);
+
   }
 
   void HideLines(int frame)
@@ -216,6 +265,22 @@ public class LADrawLine : MonoBehaviour
     foreach (LineRenderer line in m_linesBuffer[frame])
     {
       line.enabled = true;
+    }
+  }
+
+  void TransparentLines(int frame)
+  {
+    for (int i = 0; i < m_linesBuffer[frame].Count; i++)
+    {
+      m_linesBuffer[frame][i].materials[0].color = m_linesColorsBuffer[frame][i] * 0.15f;
+    }
+  }
+
+  void ColoredLines(int frame)
+  {
+    for (int i = 0; i < m_linesBuffer[frame].Count; i++)
+    {
+      m_linesBuffer[frame][i].materials[0].color = m_linesColorsBuffer[frame][i];
     }
   }
 
