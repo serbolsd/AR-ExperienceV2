@@ -55,5 +55,10 @@ public class pauseMenu : MonoBehaviour
     Time.timeScale = 1.0f;
     m_pauseScreen.SetActive(false);
     m_showing = false;
+    var laman = FindObjectOfType<LAManager>();
+    if (null != laman)
+    {
+      laman.mouseExitButton();
+    }
   }
 }
