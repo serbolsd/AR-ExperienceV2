@@ -16,6 +16,8 @@ public class LDVTempGameManager : MonoBehaviour
   public GameObject btnErase;
   public GameObject btnMove;
   public GameObject btnPlayReset;
+  public GameObject btnDeleteAll;
+  public GameObject m_gameOverScreen;
   GameObject currentBtn;
   public Sprite spritePlay;
   public Sprite spriteStop;
@@ -148,4 +150,17 @@ public class LDVTempGameManager : MonoBehaviour
     mpuseOnSomething = false;
   }
 
+  public void deleteAll()
+  {
+    grid.deleteAllObjects();
+  }
+
+  public void seguirEditando()
+  {
+    //other.GetComponent<LDVplayer>().m_active = false;
+    m_gameOverScreen.SetActive(false);
+    mpuseOnSomething = false;
+    btnPlayReset.GetComponent<Button>().image.sprite = spritePlay;
+    player.reset();
+  }
 }

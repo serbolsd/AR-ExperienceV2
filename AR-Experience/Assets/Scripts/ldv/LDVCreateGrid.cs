@@ -125,4 +125,38 @@ public class LDVCreateGrid : MonoBehaviour
     winTile.y += diferenceLevel;
   }
 
+  public void deleteAllObjects()
+  {
+    int indexColumn = 0;
+    int indexRow = 0;
+    float poslevel = 0;
+    float currentlevelpos = tileSize * levels;
+    float diferenceLevel = currentlevelpos / levels;
+    limitDown = currentlevelpos = -(currentlevelpos / 2);
+    float nextLevel = 1 * tileSize;
+    for (int level = 0; level < levels; level++)
+    {
+      for (float i = init_largo; i < largo; i += tileSize)
+      {
+        for (float j = init_ancho; j < ancho; j += tileSize)
+        {
+          if (gridTiles[level][indexRow][indexColumn].m_hasObject && 
+              gridTiles[level][indexRow][indexColumn].m_movibleObject)
+          {
+            Destroy(gridTiles[level][indexRow][indexColumn].myObject);
+            gridTiles[level][indexRow][indexColumn].myObject = null;
+            gridTiles[level][indexRow][indexColumn].m_hasObject = false;
+          }
+
+          indexColumn++;
+        }
+        indexRow++;
+        indexColumn = 0;
+      }
+      poslevel += nextLevel;
+      currentlevelpos += diferenceLevel;
+      indexRow = 0;
+      indexColumn = 0;
+    }
+  }
 }

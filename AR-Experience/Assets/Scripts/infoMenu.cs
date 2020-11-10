@@ -48,5 +48,10 @@ public class infoMenu : MonoBehaviour
     Time.timeScale = 1.0f;
     m_infoScreen.SetActive(false);
     m_showing = false;
+    var laman = FindObjectOfType<LAManager>();
+    if (null != laman)
+    {
+      laman.mouseExitButton();
+    }
   }
 }
