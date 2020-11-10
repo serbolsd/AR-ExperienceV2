@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LPATargetManager : MonoBehaviour
 {
+  public Text m_photoCounterText;
   public GameObject m_currTarget;
   public GameObject m_prefabTarget;
   public GameObject[] m_targets;
@@ -51,6 +53,8 @@ public class LPATargetManager : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
+    m_photoCounterText.text = m_currTargetIndex + "/" + m_numberOfTargets;
+
     m_timeCounter += Time.deltaTime * m_speed;
     m_targetIcon.transform.position = m_currTarget.transform.position + (Vector3.up * m_heightOffset) + (Vector3.up * Mathf.Sin(m_timeCounter)*0.1f);
   }
@@ -65,6 +69,7 @@ public class LPATargetManager : MonoBehaviour
     }
     else
     {
+      m_currTargetIndex++;
       Debug.Log("gameOver");
       return false;
     }

@@ -30,7 +30,7 @@ public class LADrawLine : MonoBehaviour
   public float m_frameDuration = 0.25f;
   float m_frameTimeCounter = 0.0f;
   bool m_isPlaying = false;
-
+  public Text m_layerCountText;
   // Start is called before the first frame update
   public void onStart()
   {
@@ -95,7 +95,7 @@ public class LADrawLine : MonoBehaviour
 
           ShowLines(m_currentFrame); //se muestra y colorea la actual
           ColoredLines(m_currentFrame);
-
+          UpdateUILayerCounter();
         }
       }
 
@@ -174,8 +174,9 @@ public class LADrawLine : MonoBehaviour
 
     TransparentLines(m_currentFrame-1); //se transparenta la anterior
 
-    m_linesBuffer.Add(new List<LineRenderer>());
-    m_linesColorsBuffer.Add(new List<Color>());
+    m_linesBuffer.Insert(m_currentFrame, new List<LineRenderer>());
+    m_linesColorsBuffer.Insert(m_currentFrame, new List<Color>());
+    UpdateUILayerCounter();
   }
 
   public void onDeleteFrameClick()
@@ -191,15 +192,16 @@ public class LADrawLine : MonoBehaviour
     }
     m_linesBuffer.RemoveAt(m_currentFrame);
     m_linesColorsBuffer.RemoveAt(m_currentFrame);
+    m_currentFrame--;
     if (m_currentFrame > 0)
     {
-      m_currentFrame--;
       ShowLines(m_currentFrame);
       ColoredLines(m_currentFrame);
 
       ShowLines(m_currentFrame-1);
       TransparentLines(m_currentFrame - 1);
     }
+    UpdateUILayerCounter();
   }
 
   public void onPreviousFrameClick()
@@ -219,6 +221,7 @@ public class LADrawLine : MonoBehaviour
         TransparentLines(m_currentFrame-1);
       }
     }
+    UpdateUILayerCounter();
   }
 
   public void onNextFrameClick()
@@ -238,13 +241,17 @@ public class LADrawLine : MonoBehaviour
       ColoredLines(m_currentFrame);
 
     }
+    UpdateUILayerCounter();
   }
 
   public void onPlayAnimClick()
   {
     m_isPlaying = true;
 
-    HideLines(m_currentFrame - 1); //se oculta la anterior
+    if (m_currentFrame > 0)
+    {
+      HideLines(m_currentFrame - 1); //se oculta la anterior
+    }
     HideLines(m_currentFrame);
     m_currentFrame = 0;
     ShowLines(m_currentFrame);
@@ -293,6 +300,11 @@ public class LADrawLine : MonoBehaviour
       button.GetComponent<Image>().color = tempColor;
     }
     m_Brushbuttons[m_selectedBrush].GetComponent<Image>().color = _color;
+  }
+
+  public void UpdateUILayerCounter()
+  {
+    m_layerCountText.text = m_currentFrame+1 + "/" + m_linesBuffer.Count;
   }
 
 }
