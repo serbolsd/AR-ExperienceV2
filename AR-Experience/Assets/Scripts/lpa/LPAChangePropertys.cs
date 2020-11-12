@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Rendering.PostProcessing;
 
 public class LPAChangePropertys : MonoBehaviour
@@ -16,6 +17,7 @@ public class LPAChangePropertys : MonoBehaviour
   public FloatParameter m_Distorcion;
 
   public lpaUI m_UI;
+  public Image m_focusSquare;
 
   float m_minRange = 4.5f;
   float m_maxRange = 5.0f;
@@ -33,6 +35,7 @@ public class LPAChangePropertys : MonoBehaviour
   bool m_focusCorrect = false;
   bool m_saturationCorrect = false;
   bool m_contrastCorrect = false;
+  bool m_lookCorrect = false;
 
   public bool m_gameOver = false;
 
@@ -111,6 +114,23 @@ public class LPAChangePropertys : MonoBehaviour
     //{
     //
     //}
+
+    //is looking at target
+    Ray raycast = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+    RaycastHit hit;
+    if (Physics.Raycast(raycast, out hit, 10000))
+    {
+      if (hit.transform.gameObject == m_targetManager.m_currTarget)
+      {
+        m_lookCorrect = true;
+        m_focusSquare.color = Color.green;
+      }
+      else
+      {
+        m_lookCorrect = false;
+        m_focusSquare.color = Color.white;
+      }
+    }
   }
 
   void calculateFocalDistance()
@@ -187,30 +207,20 @@ public class LPAChangePropertys : MonoBehaviour
     {
       return;
     }
-    Ray raycast = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-    RaycastHit hit;
-    if (Physics.Raycast(raycast, out hit, 10000) && m_focusCorrect && m_saturationCorrect && m_contrastCorrect)
+    if (m_lookCorrect && m_focusCorrect && m_saturationCorrect && m_contrastCorrect)
     {
-      if (hit.transform.gameObject == m_targetManager.m_currTarget)
+      Debug.Log("correct target");
+      if (m_targetManager.ChangeTarget())
       {
-        Debug.Log("correct target");
-        if (m_targetManager.ChangeTarget())
-        {
-          calculateRequeriments();
-        }
-        else
-        {
-          m_gameOver = true;
-          gameOverWindow.SetActive(true);
-        }
-        AudioManager.playSound(Sounds.photo, 1.0f);
-        AudioManager.playSound(Sounds.correct, 0.2f);
+        calculateRequeriments();
       }
       else
       {
-        Debug.Log("wrong target");
-        AudioManager.playSound(Sounds.wrong, 0.9f);
+        m_gameOver = true;
+        gameOverWindow.SetActive(true);
       }
+      AudioManager.playSound(Sounds.photo, 1.0f);
+      AudioManager.playSound(Sounds.correct, 0.2f);
     }
     else
     {

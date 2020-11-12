@@ -772,7 +772,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 198952825}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.11, y: -1.35, z: 1.53}
+  m_LocalPosition: {x: 1.11, y: -1.35, z: 4.9500003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1562633074}
@@ -868,7 +868,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 261862298}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.8315997, z: -1.0479}
+  m_LocalPosition: {x: 0, y: -1.8315997, z: 2.3721004}
   m_LocalScale: {x: 1.2783, y: 1.2783, z: 1.2783}
   m_Children: []
   m_Father: {fileID: 1562633074}
@@ -1393,7 +1393,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4475235616922418, guid: f97ab99050792ec49b670a23e858f9d5, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4475235616922418, guid: f97ab99050792ec49b670a23e858f9d5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1658,7 +1658,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1151075570733489796, guid: 9474f9328bdca714e9d9be04fd91ff2d, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1151075570733489796, guid: 9474f9328bdca714e9d9be04fd91ff2d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2701,7 +2701,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -60, z: 0}
 --- !u!1 &748443977
 GameObject:
@@ -2861,7 +2861,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 798162746}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -6.3659, y: 4.51, z: -0.79224}
+  m_LocalPosition: {x: -6.3659, y: 4.51, z: 2.62776}
   m_LocalScale: {x: 12.416687, y: 12.692966, z: 1.2783}
   m_Children: []
   m_Father: {fileID: 1562633074}
@@ -3007,7 +3007,6 @@ GameObject:
   - component: {fileID: 824527418}
   - component: {fileID: 824527417}
   - component: {fileID: 824527416}
-  - component: {fileID: 824527419}
   m_Layer: 5
   m_Name: PauseScreen
   m_TagString: Untagged
@@ -3075,51 +3074,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &824527419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 824527415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: LDVTempGameManager, Assembly-CSharp
-          m_MethodName: mouseOnButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: LDVTempGameManager, Assembly-CSharp
-          m_MethodName: mouseExitButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &837586732
 GameObject:
   m_ObjectHideFlags: 0
@@ -3228,7 +3182,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 840311125}
   m_LocalRotation: {x: -0, y: -0, z: -1, w: -0.00000035762784}
-  m_LocalPosition: {x: 0, y: 10.76, z: -1.0479}
+  m_LocalPosition: {x: 0, y: 10.76, z: 2.3721004}
   m_LocalScale: {x: 1.2783, y: 1.2783, z: 1.2783}
   m_Children: []
   m_Father: {fileID: 1562633074}
@@ -3425,6 +3379,7 @@ MonoBehaviour:
     overrideState: 0
     value: 0
   m_UI: {fileID: 0}
+  m_focusSquare: {fileID: 1130222035}
   m_gameOver: 0
   gameOverWindow: {fileID: 1134555523}
 --- !u!4 &875673168
@@ -3455,11 +3410,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_photoCounterText: {fileID: 361660705}
   m_currTarget: {fileID: 0}
-  m_prefabTarget: {fileID: 9187873025786201275, guid: 3468523dc9d92eb4f86409d8e3dff69b, type: 3}
+  m_prefabTarget:
+  - {fileID: 4225928087006136894, guid: 19574051da339184aabf9c6d94399d9a, type: 3}
+  - {fileID: 2517937268047254833, guid: 59edff21588b05c41b22b1f6123f4e5d, type: 3}
+  - {fileID: 3413036709693776261, guid: 07fb7fe627636474c8307d30787bf083, type: 3}
   m_targets: []
   m_targetIcon: {fileID: 1093602925}
   m_lPAChangePropertys: {fileID: 875673167}
-  m_heightOffset: 1.2
+  m_heightOffset: 1.8
   m_wroldTransform: {fileID: 1562633074}
   m_speed: 8
   m_numberOfTargets: 6
@@ -3638,7 +3596,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -5.2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4010,7 +3968,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1044775485}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 4.51, z: -6.9663}
+  m_LocalPosition: {x: 0, y: 4.51, z: -3.5463}
   m_LocalScale: {x: 13.131888, y: 12.692966, z: 1.2783}
   m_Children: []
   m_Father: {fileID: 1562633074}
@@ -4106,7 +4064,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1046270260}
   m_LocalRotation: {x: -0, y: 0.70710576, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: 6.1997, y: 4.51, z: -0.79224}
+  m_LocalPosition: {x: 6.1997, y: 4.51, z: 2.62776}
   m_LocalScale: {x: 12.416687, y: 12.692966, z: 1.2783}
   m_Children: []
   m_Father: {fileID: 1562633074}
@@ -5091,7 +5049,6 @@ GameObject:
   - component: {fileID: 1159361614}
   - component: {fileID: 1159361617}
   - component: {fileID: 1159361616}
-  - component: {fileID: 1159361615}
   m_Layer: 5
   m_Name: GameOverFaildScreen
   m_TagString: Untagged
@@ -5121,51 +5078,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1159361615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1159361613}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: LDVTempGameManager, Assembly-CSharp
-          m_MethodName: mouseOnButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: LDVTempGameManager, Assembly-CSharp
-          m_MethodName: mouseExitButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1159361616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5671,7 +5583,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1420283861}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.51, z: 5.3691}
+  m_LocalPosition: {x: 0, y: 4.51, z: 8.789101}
   m_LocalScale: {x: 13.342625, y: 12.692966, z: 1.2783}
   m_Children: []
   m_Father: {fileID: 1562633074}
@@ -5959,7 +5871,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4783076244365952, guid: c2a81dba06fdc19449b44d7533c5106c, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4783076244365952, guid: c2a81dba06fdc19449b44d7533c5106c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6888,7 +6800,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1923793353}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.52, y: -1.35, z: 3.1799998}
+  m_LocalPosition: {x: -1.52, y: -1.35, z: 6.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1562633074}
@@ -6905,7 +6817,6 @@ GameObject:
   - component: {fileID: 2028120402}
   - component: {fileID: 2028120401}
   - component: {fileID: 2028120400}
-  - component: {fileID: 2028120403}
   m_Layer: 5
   m_Name: InfoScreen
   m_TagString: Untagged
@@ -6974,51 +6885,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 179}
   m_SizeDelta: {x: 77.3, y: 127.2}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2028120403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2028120399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: LDVTempGameManager, Assembly-CSharp
-          m_MethodName: mouseOnButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: LDVTempGameManager, Assembly-CSharp
-          m_MethodName: mouseExitButton
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &2040088697
 GameObject:
   m_ObjectHideFlags: 0
@@ -7228,7 +7094,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 50, y: 180, z: 0}
 --- !u!1 &2121952735
 GameObject:
@@ -7320,7 +7186,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 50, y: 60, z: 0}
 --- !u!1001 &9187873024687219980
 PrefabInstance:
@@ -7339,7 +7205,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9187873025786201271, guid: 3468523dc9d92eb4f86409d8e3dff69b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.04
+      value: 2.38
       objectReference: {fileID: 0}
     - target: {fileID: 9187873025786201271, guid: 3468523dc9d92eb4f86409d8e3dff69b, type: 3}
       propertyPath: m_LocalRotation.x
