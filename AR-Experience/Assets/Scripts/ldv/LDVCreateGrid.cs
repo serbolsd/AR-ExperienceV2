@@ -38,6 +38,10 @@ public class LDVCreateGrid : MonoBehaviour
   public float starPos;
   public float limitDown=0.0f;
   public Vector3 playerPos;
+
+  public bool activeFireThrower = true;
+  public Transform worldTransform;
+  public GameObject fireThrower;
   //float distance;
   // Start is called before the first frame update
   public void onStart()
@@ -109,20 +113,36 @@ public class LDVCreateGrid : MonoBehaviour
     initTile = new Vector2Int(ran, 0);
     if (ran < levels - 1)
     {
-      gridTiles[ran + 1][0][0].m_hasObject = true;
-      gridTiles[ran + 1][0][0].m_movibleObject = false;
+      gridTiles[ran][0][0].m_hasObject = true;
+      gridTiles[ran][0][0].m_movibleObject = false;
     }
     playerPos = gridTiles[ran + 1][0][0].m_position;
     ran = Random.Range(0, levels - 1);
     finishTile = new Vector2Int(ran, columns - 1);
     if (ran < levels - 1)
     {
-      gridTiles[ran + 1][0][columns - 1].m_hasObject = true;
-      gridTiles[ran + 1][0][columns - 1].m_movibleObject = false;
+      gridTiles[ran][0][columns - 1].m_hasObject = true;
+      gridTiles[ran][0][columns - 1].m_movibleObject = false;
     }
 
     winTile = grid[ran][0][columns - 1];
     winTile.y += diferenceLevel;
+    if (activeFireThrower)
+    {
+      for (int i = 2; i < columns - 3; i+=2)
+      {
+        ran = Random.Range(0, 100);
+        if (ran < 50)
+        {
+          ran = Random.Range(0, levels - 1);
+          gridTiles[ran][0][i].m_hasObject = true;
+          gridTiles[ran][0][i].m_movibleObject = false;
+          GameObject newObj = null;
+          newObj = Instantiate(fireThrower, grid[ran][0][i], Quaternion.identity, worldTransform);
+          gridTiles[ran][0][i].myObject = newObj;
+        }
+      }
+    }
   }
 
   public void deleteAllObjects()
