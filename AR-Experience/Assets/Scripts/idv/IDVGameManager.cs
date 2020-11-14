@@ -24,6 +24,7 @@ public class IDVGameManager : MonoBehaviour
   public Text m_winOrLoseText;
 
   bool m_gameStarted = false;
+  bool m_gameEnded = false;
 
   bool m_paused = false;
 
@@ -47,12 +48,22 @@ public class IDVGameManager : MonoBehaviour
   {
     if (m_player.m_life <= 0)
     {
+      if (!m_gameEnded)
+      {
+        m_gameEnded = true;
+        AudioManager.playSound(Sounds.wrong, 0.8f);
+      }
       m_gameOverScreen.SetActive(true);
       m_shootButton.gameObject.SetActive(false);
       m_winOrLoseText.text = "Game Over";
     }
     else if (m_enemyManager.m_roundEnded)
     {
+      if (!m_gameEnded)
+      {
+        m_gameEnded = true;
+        AudioManager.playSound(Sounds.correct, 0.8f);
+      }
       m_gameOverScreen.SetActive(true);
       m_shootButton.gameObject.SetActive(false);
       m_winOrLoseText.text = "¡Ganaste!";

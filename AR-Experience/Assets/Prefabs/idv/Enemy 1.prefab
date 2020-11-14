@@ -376,6 +376,7 @@ MonoBehaviour:
   m_worldRoot: {fileID: 0}
   m_arrow: {fileID: 0}
   m_manager: {fileID: 0}
+  m_deathParticle: {fileID: 191186, guid: f00caa20f18026148b00c6ed414925d9, type: 3}
   m_target: {fileID: 0}
   m_maxLife: 2
   m_lifeBar: {fileID: 8052201065436932833}

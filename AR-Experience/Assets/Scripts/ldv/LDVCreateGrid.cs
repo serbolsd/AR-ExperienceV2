@@ -129,7 +129,7 @@ public class LDVCreateGrid : MonoBehaviour
     winTile.y += diferenceLevel;
     if (activeFireThrower)
     {
-      for (int i = 2; i < columns - 3; i+=2)
+      for (int i = 4; i < columns - 4; i+=2)
       {
         ran = Random.Range(0, 100);
         if (ran < 50)

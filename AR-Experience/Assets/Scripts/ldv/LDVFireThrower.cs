@@ -21,7 +21,7 @@ public class LDVFireThrower : MonoBehaviour
   {
     if (other.tag == "Player")
     {
-      AudioManager.playSound(Sounds.hurt);
+      AudioManager.playSound(Sounds.explosion);
       m_manager.playStop();
     }
   }
