@@ -8,6 +8,7 @@ public class IDVEnemy : MonoBehaviour
   public GameObject m_worldRoot;
   public IDVFollowInCanvas m_arrow;
   public IDVEnemyManager m_manager;
+  public GameObject m_deathParticle;
 
   [Header("Target")]
   public Transform m_target;
@@ -121,6 +122,7 @@ public class IDVEnemy : MonoBehaviour
     {
       m_manager.m_enemiesKilled++;
       AudioManager.playSound(Sounds.explosion, 0.9f);
+      GameObject newParticle = Instantiate(m_deathParticle, transform.position, Quaternion.Euler(-90,0,0), m_worldRoot.transform);
       Destroy(m_arrow.gameObject);
       Destroy(gameObject);
     }

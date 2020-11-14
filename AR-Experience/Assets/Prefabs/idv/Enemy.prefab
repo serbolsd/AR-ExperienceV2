@@ -373,6 +373,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_worldRoot: {fileID: 0}
+  m_arrow: {fileID: 0}
+  m_manager: {fileID: 0}
+  m_deathParticle: {fileID: 191186, guid: f00caa20f18026148b00c6ed414925d9, type: 3}
   m_target: {fileID: 0}
   m_maxLife: 3
   m_lifeBar: {fileID: 8052201065436932833}
@@ -381,6 +384,7 @@ MonoBehaviour:
   m_sideMovementLenght: 1
   m_bulletPrefab: {fileID: 981233773545822694, guid: 14bfbf08a808d2840b101de991bb4595, type: 3}
   m_shootInterval: 5
+  m_visible: 0
 --- !u!1 &8218491678612963161
 GameObject:
   m_ObjectHideFlags: 0

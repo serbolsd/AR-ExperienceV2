@@ -181,7 +181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_speed: 3
   m_inclinationSpeed: 0.04
-  m_jumpPower: 4.6
+  m_jumpPower: 5.5
   m_limitDown: 1
   m_active: 0
   m_grounded: 1
