@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 6101628255463329804}
   - component: {fileID: 6101628255463329801}
   - component: {fileID: 6101628255463329806}
-  - component: {fileID: 6101628255463329807}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 6101628255463329805}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.25, z: 0}
-  m_LocalScale: {x: 0.9590625, y: 0.525, z: 1}
+  m_LocalScale: {x: 0.9590625, y: 0.525, z: 0.5}
   m_Children: []
   m_Father: {fileID: 6101628257000109060}
   m_RootOrder: 0
@@ -82,19 +81,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6101628255463329807
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6101628255463329805}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6101628257000109061
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,7 +92,8 @@ GameObject:
   - component: {fileID: 6101628257000109060}
   - component: {fileID: 6101628257000109062}
   - component: {fileID: 6101628257000109063}
-  m_Layer: 0
+  - component: {fileID: 2960337944530224339}
+  m_Layer: 8
   m_Name: FireThrower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +127,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2.0062287, z: 0.67323685}
+  m_Size: {x: 0.4, y: 2.0062287, z: 0.4}
   m_Center: {x: 0, y: 0.50311434, z: -0.007780075}
 --- !u!114 &6101628257000109063
 MonoBehaviour:
@@ -154,6 +141,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc7560b7256b304ab8d07f6f60bbfa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2960337944530224339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6101628257000109061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad30531c22ea9d740aa2765bd2e590c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_id: -1
 --- !u!1001 &6101628256409288029
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -164,6 +164,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 756d99540142b5e4a8d174e18a6310d9, type: 3}
       propertyPath: m_Name
       value: FX_Fire
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 756d99540142b5e4a8d174e18a6310d9, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 756d99540142b5e4a8d174e18a6310d9, type: 3}
       propertyPath: m_LocalPosition.x

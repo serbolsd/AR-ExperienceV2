@@ -4743,15 +4743,15 @@ RectTransform:
   m_GameObject: {fileID: 1836420895}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.20238999, y: 0.29438546, z: 0.20238999}
+  m_LocalScale: {x: 0.09249093, y: 0.13453227, z: 0.09249093}
   m_Children: []
   m_Father: {fileID: 2028120402}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 1.2}
-  m_SizeDelta: {x: 389.1, y: 293}
+  m_AnchoredPosition: {x: 0, y: -1.2}
+  m_SizeDelta: {x: 760.4, y: 599.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1836420897
 MonoBehaviour:
@@ -4775,11 +4775,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 6a74b30a66d0b694f921e61f97e9408f, type: 3}
-    m_FontSize: 25
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
-    m_MaxSize: 42
+    m_MaxSize: 50
     m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -5087,7 +5087,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2028120400
 MonoBehaviour:
   m_ObjectHideFlags: 0
