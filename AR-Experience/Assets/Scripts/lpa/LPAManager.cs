@@ -15,6 +15,7 @@ public class LPAManager : MonoBehaviour
   public Button m_pause;
   public Button m_info;
 
+  public IDVFollowInCanvas arrow;
   void Start()
   {
     if (m_timerActive)
@@ -38,6 +39,7 @@ public class LPAManager : MonoBehaviour
       m_info.interactable = false;
       return;
     }
+    arrow.onUpdate();
     m_timer -= Time.deltaTime;
     int entero = (int)m_timer;
     m_timerTxt.GetComponent<Text>().text = entero.ToString();
