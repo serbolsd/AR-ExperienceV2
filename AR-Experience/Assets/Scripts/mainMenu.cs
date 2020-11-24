@@ -7,6 +7,7 @@ public class mainMenu : MonoBehaviour
 {
   public GameObject menuScreen;
   public GameObject creditsScreen;
+  public GameObject m_tutorialScreen;
 
   /**
    * game is the game to load
@@ -52,6 +53,16 @@ public class mainMenu : MonoBehaviour
     AudioManager.playSound(Sounds.click, 1.0f);
     creditsScreen.SetActive(false);
     menuScreen.SetActive(true);
+  }
+
+  private void Start()
+  {
+    if (!PlayerPrefs.HasKey("FirstTime"))
+    {
+      //activar tutorial
+      m_tutorialScreen.SetActive(true);
+      PlayerPrefs.SetInt("FirstTime", 1);
+    }
   }
 
 }
