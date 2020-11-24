@@ -27,6 +27,10 @@ public class pauseMenu : MonoBehaviour
   public void OnButtonExit()
   {
     Time.timeScale = 1.0f;
+    if (PlayerPrefs.HasKey("FirtsLevel"))
+    {
+      PlayerPrefs.DeleteKey("FirtsLevel");
+    }
     SceneManager.LoadScene("MainMenu");
   }
 

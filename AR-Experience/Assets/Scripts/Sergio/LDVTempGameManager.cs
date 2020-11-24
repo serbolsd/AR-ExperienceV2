@@ -22,6 +22,8 @@ public class LDVTempGameManager : MonoBehaviour
   public Sprite spritePlay;
   public Sprite spriteStop;
   public bool mpuseOnSomething=false;
+
+  public GameObject infoObject;
   // Start is called before the first frame update
   void Start()
   {
@@ -58,6 +60,16 @@ public class LDVTempGameManager : MonoBehaviour
       player.m_startPosition = grid.playerPos;
       player.m_limitDown = grid.limitDown;
     }
+
+    if (!PlayerPrefs.HasKey("FirtsLevel"))
+    {
+      infoObject.SetActive(true);
+      PlayerPrefs.SetInt("FirtsLevel", 1);
+    }
+  }
+
+  private void OnDestroy()
+  {
   }
 
   // Update is called once per frame

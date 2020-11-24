@@ -63,6 +63,10 @@ public class mainMenu : MonoBehaviour
       m_tutorialScreen.SetActive(true);
       PlayerPrefs.SetInt("FirstTime", 1);
     }
+    if (PlayerPrefs.HasKey("FirtsLevel"))
+    {
+      PlayerPrefs.DeleteKey("FirtsLevel");
+    }
   }
 
 }
