@@ -5,6 +5,16 @@ using UnityEngine;
 public class LDVFireThrower : MonoBehaviour
 {
   LDVTempGameManager m_manager;
+
+  private void Awake()
+  {
+    #if UNITY_EDITOR
+      Debug.unityLogger.logEnabled = true;
+    #else
+      Debug.unityLogger.logEnabled = false;
+    #endif
+  }
+
   // Start is called before the first frame update
   void Start()
   {

@@ -28,6 +28,15 @@ public class IDVGameManager : MonoBehaviour
 
   bool m_paused = false;
 
+  private void Awake()
+  {
+    #if UNITY_EDITOR
+      Debug.unityLogger.logEnabled = true;
+    #else
+      Debug.unityLogger.logEnabled = false;
+    #endif
+  }
+
   void Start()
   {
     Time.timeScale = 1.0f;

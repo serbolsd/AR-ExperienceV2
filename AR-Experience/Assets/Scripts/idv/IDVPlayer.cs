@@ -19,6 +19,15 @@ public class IDVPlayer : MonoBehaviour
   // the prefab of bullet to intanciate when shooting
   public GameObject bullet;
 
+  private void Awake()
+  {
+    #if UNITY_EDITOR
+      Debug.unityLogger.logEnabled = true;
+    #else
+      Debug.unityLogger.logEnabled = false;
+    #endif
+  }
+
   // Start is called before the first frame update
   void Start()
   {

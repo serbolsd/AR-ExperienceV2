@@ -53,6 +53,8 @@ namespace easyar
         /// <para xml:lang="en">Global <see cref="EasyARSettings"/>.</para>
         /// <para xml:lang="zh">全局<see cref="EasyARSettings"/>。</para>
         /// </summary>
+        /// 
+
         public static EasyARSettings Settings
         {
             get
@@ -85,8 +87,8 @@ namespace easyar
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         public static void GlobalInitialization()
         {
-            Debug.Log("EasyAR Sense Unity Plugin Version " + EasyARVersion.FullVersion);
 #if UNITY_EDITOR
+            Debug.Log("EasyAR Sense Unity Plugin Version " + EasyARVersion.FullVersion);
             Log.setLogFunc((LogLevel, msg) =>
             {
                 switch (LogLevel)
@@ -176,6 +178,11 @@ namespace easyar
         /// </summary>
         private void Awake()
         {
+            #if UNITY_EDITOR
+              Debug.unityLogger.logEnabled = true;
+            #else
+              Debug.unityLogger.logEnabled = false;
+            #endif
             Instance = this;
             Display = new Display();
             Worker = new ThreadWorker();

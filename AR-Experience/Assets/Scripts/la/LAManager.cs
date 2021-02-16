@@ -24,6 +24,15 @@ public class LAManager : MonoBehaviour
   public GameObject m_A;
   public GameObject m_pre;
 
+  private void Awake()
+  {
+    #if UNITY_EDITOR
+      Debug.unityLogger.logEnabled = true;
+    #else
+      Debug.unityLogger.logEnabled = false;
+    #endif
+  }
+
   // Start is called before the first frame update
   void Start()
   {

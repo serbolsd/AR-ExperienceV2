@@ -31,6 +31,16 @@ public class IDVEnemy : MonoBehaviour
   float m_shootIntervalCounter = 0.0f;
 
   public bool m_visible = false;
+
+  private void Awake()
+  {
+    #if UNITY_EDITOR
+      Debug.unityLogger.logEnabled = true;
+    #else
+      Debug.unityLogger.logEnabled = false;
+    #endif
+  }
+
   void Start()
   {
     m_currentLife = m_maxLife;

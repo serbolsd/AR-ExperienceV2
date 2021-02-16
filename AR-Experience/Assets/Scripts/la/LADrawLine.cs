@@ -31,6 +31,16 @@ public class LADrawLine : MonoBehaviour
   float m_frameTimeCounter = 0.0f;
   bool m_isPlaying = false;
   public Text m_layerCountText;
+
+  private void Awake()
+  {
+    #if UNITY_EDITOR
+      Debug.unityLogger.logEnabled = true;
+    #else
+      Debug.unityLogger.logEnabled = false;
+    #endif
+  }
+
   // Start is called before the first frame update
   public void onStart()
   {

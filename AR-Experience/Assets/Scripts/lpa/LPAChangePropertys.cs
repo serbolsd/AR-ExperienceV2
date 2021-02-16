@@ -40,6 +40,16 @@ public class LPAChangePropertys : MonoBehaviour
   public bool m_gameOver = false;
 
   public GameObject gameOverWindow;
+
+  private void Awake()
+  {
+    #if UNITY_EDITOR
+      Debug.unityLogger.logEnabled = true;
+    #else
+      Debug.unityLogger.logEnabled = false;
+    #endif
+  }
+
   // Start is called before the first frame update
   void Start()
   {

@@ -28,6 +28,15 @@ public class LAPCCameraControls : MonoBehaviour
 
 	Quaternion originalRotation;
 
+  private void Awake()
+  {
+    #if UNITY_EDITOR
+      Debug.unityLogger.logEnabled = true;
+    #else
+      Debug.unityLogger.logEnabled = false;
+    #endif
+  }
+
 	void Update()
 	{
 		if (Input.GetMouseButton(1))

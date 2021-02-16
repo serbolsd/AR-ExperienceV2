@@ -25,6 +25,15 @@ public class LDVMoveObjectInGrid : MonoBehaviour
   LDVCreateGrid mapGrid;
   LDVTempGameManager man;
 
+  private void Awake()
+  {
+    #if UNITY_EDITOR
+      Debug.unityLogger.logEnabled = true;
+    #else
+      Debug.unityLogger.logEnabled = false;
+    #endif
+  }
+
   public void onStart()
   {
     mapGrid = FindObjectOfType<LDVCreateGrid>();

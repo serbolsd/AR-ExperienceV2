@@ -16,6 +16,16 @@ public class LPAManager : MonoBehaviour
   public Button m_info;
 
   public IDVFollowInCanvas arrow;
+
+  private void Awake()
+  {
+    #if UNITY_EDITOR
+      Debug.unityLogger.logEnabled = true;
+    #else
+      Debug.unityLogger.logEnabled = false;
+    #endif
+  }
+
   void Start()
   {
     if (m_timerActive)

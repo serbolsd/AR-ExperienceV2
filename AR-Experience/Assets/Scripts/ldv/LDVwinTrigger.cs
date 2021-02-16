@@ -10,6 +10,15 @@ public class LDVwinTrigger : MonoBehaviour
   public Button m_restartButton;
   public Button m_exitButton;
 
+  private void Awake()
+  {
+    #if UNITY_EDITOR
+      Debug.unityLogger.logEnabled = true;
+    #else
+      Debug.unityLogger.logEnabled = false;
+    #endif
+  }
+
   private void Start()
   {
     m_restartButton.onClick.AddListener(OnButtonRestart);

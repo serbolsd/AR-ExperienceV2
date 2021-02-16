@@ -20,6 +20,14 @@ public class lpaUI : MonoBehaviour
   public Text m_saturacionText;
   public Text m_focalLenghtText;
 
+  private void Awake()
+  {
+    #if UNITY_EDITOR
+      Debug.unityLogger.logEnabled = true;
+    #else
+      Debug.unityLogger.logEnabled = false;
+    #endif
+  }
   // Update is called once per frame
   void Update()
   {

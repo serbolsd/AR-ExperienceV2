@@ -43,6 +43,16 @@ public class LDVCreateGrid : MonoBehaviour
   public Transform worldTransform;
   public GameObject fireThrower;
   //float distance;
+
+  private void Awake()
+  {
+    #if UNITY_EDITOR
+      Debug.unityLogger.logEnabled = true;
+    #else
+      Debug.unityLogger.logEnabled = false;
+    #endif
+  }
+
   // Start is called before the first frame update
   public void onStart()
   {

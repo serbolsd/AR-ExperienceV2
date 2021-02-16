@@ -29,6 +29,15 @@ public class IDVBullet : MonoBehaviour
   // The color if the bulled was shooted by a enemy
   public Material m_materialEnemy;
 
+  private void Awake()
+  {
+    #if UNITY_EDITOR
+      Debug.unityLogger.logEnabled = true;
+    #else
+      Debug.unityLogger.logEnabled = false;
+    #endif
+  }
+
   // Start is called before the first frame update
   void Start()
   {

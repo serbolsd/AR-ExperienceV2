@@ -33,6 +33,14 @@ public class IDVEnemyManager : MonoBehaviour
   public float m_spawnInterval = 1.0f;
   float m_spawnIntervalCounter = 0.0f;
 
+  private void Awake()
+  {
+    #if UNITY_EDITOR
+      Debug.unityLogger.logEnabled = true;
+    #else
+      Debug.unityLogger.logEnabled = false;
+    #endif
+  }
 
   void Start()
   {

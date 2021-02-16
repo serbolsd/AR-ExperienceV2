@@ -52,6 +52,11 @@ public class AudioManager : MonoBehaviour
     linkToEnum(Sounds.remove, remove);
     linkToEnum(Sounds.photo, photo);
     linkToEnum(Sounds.wrong, wrong);
+    #if UNITY_EDITOR
+      Debug.unityLogger.logEnabled = true;
+    #else
+      Debug.unityLogger.logEnabled = false;
+    #endif
   }
 
   // Start is called before the first frame update

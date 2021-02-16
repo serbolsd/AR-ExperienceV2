@@ -11,4 +11,13 @@ public class LDVGridTile : MonoBehaviour
   public bool m_hasObject = false;
   public bool m_movibleObject = true;
   public GameObject myObject = null; 
+
+  private void Awake()
+  {
+    #if UNITY_EDITOR
+      Debug.unityLogger.logEnabled = true;
+    #else
+      Debug.unityLogger.logEnabled = false;
+    #endif
+  }
 }

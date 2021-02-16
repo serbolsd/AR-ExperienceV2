@@ -25,6 +25,15 @@ public class LDVplayer : MonoBehaviour
   [Header("Animation settings")]
   public Animator m_animator;
 
+  private void Awake()
+  {
+    #if UNITY_EDITOR
+      Debug.unityLogger.logEnabled = true;
+    #else
+      Debug.unityLogger.logEnabled = false;
+    #endif
+  }
+
   // Start is called before the first frame update
   public void onStart()
   {

@@ -18,6 +18,15 @@ public class IDVFollowInCanvas : MonoBehaviour
   public float height;
   public float angle;
 
+  private void Awake()
+  {
+    #if UNITY_EDITOR
+      Debug.unityLogger.logEnabled = true;
+    #else
+      Debug.unityLogger.logEnabled = false;
+    #endif
+  }
+
   //private void Update()
   //{
   //  onUpdate();

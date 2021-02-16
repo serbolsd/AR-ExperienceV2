@@ -3085,6 +3085,7 @@ MonoBehaviour:
   spritePlay: {fileID: 21300000, guid: 613810704b81f7a4181143b3194b5ca5, type: 3}
   spriteStop: {fileID: 21300000, guid: be2c01b5c32189c48888c7904527486e, type: 3}
   mpuseOnSomething: 0
+  infoObject: {fileID: 2028120399}
 --- !u!4 &1074183883
 Transform:
   m_ObjectHideFlags: 0
@@ -5539,7 +5540,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2028120400
 MonoBehaviour:
   m_ObjectHideFlags: 0
